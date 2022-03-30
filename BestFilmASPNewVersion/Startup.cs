@@ -28,6 +28,8 @@ namespace BestFilmASPNewVersion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -36,6 +38,8 @@ namespace BestFilmASPNewVersion
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+           
 
             services.AddTransient<IMovieRepository, MsSqlMovieRepository>();
         }
@@ -62,13 +66,30 @@ namespace BestFilmASPNewVersion
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+          
+             app.UseMvc(routes =>
+             {
+                 routes.MapRoute(
+                   name: null,
+                   template: "Page{page}",
+                   defaults: new { controller = "Movies", action = "ListView" });
+
+                 routes.MapRoute(
+                     name: null,
+                     template: "{genre}/Page{page}",
+                     defaults: new { controller = "Movies", action = "ListView" });
+
+                 routes.MapRoute(
+                     name: null,
+                     template: "{genre}",
+                     defaults: new { controller = "Movies", action = "ListView", page = 1 });
+
+                 routes.MapRoute(
+                     name: "default",
+                     template: "{controller=Home}/{action=Index}/{id?}");
+             }
+            );
+
 
             DataHelper.Seed(app);
         }

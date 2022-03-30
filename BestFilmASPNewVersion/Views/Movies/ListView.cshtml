@@ -1,71 +1,21 @@
-﻿@model IEnumerable<BestFilmASPNewVersion.Domains.Movie>
+﻿@model PageInfoModel
 
 @{
     ViewData["Title"] = "Фильмы";
 }
 
-<h1>Смотреть онлайн</h1>
+<h1> Смотреть онлайн </h1>
 
+<h2> @ViewData["Title"] </h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Realease)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Actor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Realease)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-         
-        </tr>
+@foreach (var movie in Model.Movies)
+{
+   @Html.Partial("MovieView",movie);
 }
-    </tbody>
-</table>
+
+<div>
+    <nav aria-label="Page navigation">
+        <ul page-model="Model" page-action="ListView"></ul>
+    </nav>
+</div>
+
