@@ -32,6 +32,17 @@ namespace BestFilmASPNewVersion.Data
                         Country = "США",
                         Rating = 6.3f,
                         Realease = 2022
+                    },
+                    new Movie()
+                    {
+                        Name = "V",
+                        ImageUrl ="",
+                        Actor = "V",
+                        Genre = "Приключения",
+                        Discription = "V",
+                        Country = "Норвегия",
+                        Rating = 4.5f,
+                        Realease = 2017
                     }
 
         }.AsQueryable();

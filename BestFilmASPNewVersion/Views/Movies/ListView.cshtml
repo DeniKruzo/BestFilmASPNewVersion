@@ -1,21 +1,34 @@
-﻿@model PageInfoModel
+﻿@using BestFilmASPNewVersion.Helpers
+@model PageInfoModel
+
+
 
 @{
     ViewData["Title"] = "Фильмы";
 }
-
-<h1> Смотреть онлайн </h1>
-
-<h2> @ViewData["Title"] </h2>
+<h1> @ViewData["Title"] </h1>
 
 @foreach (var movie in Model.Movies)
 {
-   @Html.Partial("MovieView",movie);
+    @Html.Partial("MovieView", movie);
 }
 
-<div>
-    <nav aria-label="Page navigation">
-        <ul page-model="Model" page-action="ListView"></ul>
-    </nav>
-</div>
+<nav aria-label="Page navigation">
+    <ul page-model="Model" page-action="ListView"></ul>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

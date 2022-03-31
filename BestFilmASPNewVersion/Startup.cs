@@ -39,7 +39,7 @@ namespace BestFilmASPNewVersion
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-           
+         
 
             services.AddTransient<IMovieRepository, MsSqlMovieRepository>();
         }
@@ -66,30 +66,43 @@ namespace BestFilmASPNewVersion
             app.UseAuthentication();
             app.UseAuthorization();
 
-          
-             app.UseMvc(routes =>
-             {
-                 routes.MapRoute(
-                   name: null,
-                   template: "Page{page}",
-                   defaults: new { controller = "Movies", action = "ListView" });
+            //app.UseMvcWithDefaultRoute();
 
-                 routes.MapRoute(
-                     name: null,
-                     template: "{genre}/Page{page}",
-                     defaults: new { controller = "Movies", action = "ListView" });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                  name: null,
+                  template: "Page{helloy}",
+                  defaults: new { Controller = "Movies", action = "ListView" });
 
-                 routes.MapRoute(
-                     name: null,
-                     template: "{genre}",
-                     defaults: new { controller = "Movies", action = "ListView", page = 1 });
+                routes.MapRoute(
+                    name: null,
+                    template: "{genre}/Page{helloy}",
+                    defaults: new { Controller = "Movies", action = "ListView" });
 
-                 routes.MapRoute(
-                     name: "default",
-                     template: "{controller=Home}/{action=Index}/{id?}");
-             }
-            );
+                routes.MapRoute(
+                    name: null,
+                    template: "{genre}",
+                    defaults: new { Controller = "Movies", action = "ListView", page = 1 });
 
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            }
+           );
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "f",
+            //        pattern: "Page{page}",
+            //        defaults: new {controller = "Movies", action = "ListView" });
+
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //    endpoints.MapRazorPages();
+            //});
 
             DataHelper.Seed(app);
         }

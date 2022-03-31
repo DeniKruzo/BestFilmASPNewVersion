@@ -19,17 +19,18 @@ namespace BestFilmASPNewVersion.Controllers
             _repo = repo;
         }
 
-        public IActionResult ListView(string genre, int page = 1)
+        
+        //[Route("[controller]/[action]")]
+        public IActionResult ListView(string genre, int helloy = 1)
         {
-            //магия тернарных операторов
+            //тернарный оператор
             var moviesOfGenre = genre == null
                 ? _repo.Movies
-                : _repo
-                .Movies
+                : _repo.Movies
                 .Where(p => p.Genre == genre);
 
             var moviesForPage = moviesOfGenre
-                .Skip((page - 1) * _pageSize) // -1 тк первую не надо скипать
+                .Skip((helloy - 1) * _pageSize) // -1 тк первую не надо скипать
                 .Take(_pageSize)
                 .ToList();
 
@@ -42,7 +43,7 @@ namespace BestFilmASPNewVersion.Controllers
             var model = new PageInfoModel()
             {
                 ActiveGenre = genre,
-                CurrentPage = page,
+                CurrentPage = helloy,
                 PagesQuantity = pagesQuantity,
                 Movies = moviesForPage.ToList()
             };

@@ -37,7 +37,8 @@ namespace BestFilmASPNewVersion.Helpers
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
 
             var tagUl = new TagBuilder("ul");
-            tagUl.AddCssClass("pagination pagination-sm");
+            tagUl.AddCssClass("pagination");
+
             for (int i = 1; i <= PageModel.PagesQuantity; i++)
             {
                 var tagLi = new TagBuilder("li");
@@ -45,7 +46,7 @@ namespace BestFilmASPNewVersion.Helpers
 
                 var tagA = new TagBuilder("a");
                 tagA.AddCssClass("page-link");
-                tagA.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
+                tagA.Attributes["href"] = urlHelper.Action(PageAction, new { helloy = i });
                 tagA.InnerHtml.Append(i.ToString());
 
                 tagLi.InnerHtml.AppendHtml(tagA);
