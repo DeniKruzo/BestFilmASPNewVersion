@@ -1,0 +1,18 @@
+﻿@model List<string>
+
+@foreach(var genre in Model)
+ {
+
+    string buttonType = genre == ViewBag.ActiveGenre ?
+        "btn btn-outline-info btn-sm" : "btn btn-outline-primary btn-sm"; 
+
+    <a asp-controller="Movies"
+       asp-action="ListView"
+       asp-route-genre="@genre"
+       asp-route-helloy="1"
+
+       class="btn btn-block @buttonType">
+        @genre
+    </a>
+
+ }

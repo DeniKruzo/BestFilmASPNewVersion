@@ -1,21 +1,39 @@
 ﻿@using BestFilmASPNewVersion.Helpers
 @model PageInfoModel
 
-
-
 @{
-    ViewData["Title"] = "Фильмы";
-}
-<h1> @ViewData["Title"] </h1>
-
-@foreach (var movie in Model.Movies)
-{
-    @Html.Partial("MovieView", movie);
+    ViewData["Title"] = $"Фильмы {Model.ActiveGenre}";
 }
 
-<nav aria-label="Page navigation">
-    <ul page-model="Model" page-action="ListView"></ul>
-</nav>
+<div class="row">
+
+
+   
+
+    <div id="genre" class="col-3">
+        <h4>Жанр:</h4>
+        <ul>@await Component.InvokeAsync("GenreMenu")</ul>
+    </div>
+
+    <div class="col-9">
+
+        <h1> @ViewData["Title"] </h1>
+
+        @foreach (var movie in Model.Movies)
+        {
+            @Html.Partial("MovieView", movie);
+        }
+
+
+    </div>
+
+    <nav aria-label="Page navigation">
+        <h5>Страница:</h5>
+        <ul page-model="Model" page-action="ListView"></ul>
+    </nav>
+</div>
+
+
 
 
 

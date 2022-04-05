@@ -71,19 +71,19 @@ namespace BestFilmASPNewVersion
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                   name: null,
+                   template: "{genre}/Page{helloy}",
+                   defaults: new { Controller = "Movies", action = "ListView" });
+
+                routes.MapRoute(
                   name: null,
                   template: "Page{helloy}",
                   defaults: new { Controller = "Movies", action = "ListView" });
 
                 routes.MapRoute(
                     name: null,
-                    template: "{genre}/Page{helloy}",
-                    defaults: new { Controller = "Movies", action = "ListView" });
-
-                routes.MapRoute(
-                    name: null,
                     template: "{genre}",
-                    defaults: new { Controller = "Movies", action = "ListView", page = 1 });
+                    defaults: new { Controller = "Movies", action = "ListView", helloy = 1 });
 
                 routes.MapRoute(
                     name: "default",
@@ -91,18 +91,6 @@ namespace BestFilmASPNewVersion
             }
            );
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "f",
-            //        pattern: "Page{page}",
-            //        defaults: new {controller = "Movies", action = "ListView" });
-
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //    endpoints.MapRazorPages();
-            //});
 
             DataHelper.Seed(app);
         }
