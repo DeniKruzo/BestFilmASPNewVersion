@@ -1,8 +1,9 @@
-﻿@using BestFilmASPNewVersion.Helpers
+﻿
+@using BestFilmASPNewVersion.Helpers
 @model BestFilmASPNewVersion.Domains.Movie
 
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="..." />
+    <img src="~/StoredImages/@Model.ImageUrl" alt="Sample"/>
     <div>
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">@Model.Discription</p>

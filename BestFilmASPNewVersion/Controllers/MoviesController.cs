@@ -1,5 +1,6 @@
 ﻿using BestFilmASPNewVersion.Abstract;
 using BestFilmASPNewVersion.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace BestFilmASPNewVersion.Controllers
        
         private readonly IMovieRepository _repo;
         private int _pageSize = 2;
+
+        // серверное окружение - нужно будет для загрузки с сайта.
+        private readonly IWebHostEnvironment _environment;
 
         public MoviesController(IMovieRepository repo)
         {
