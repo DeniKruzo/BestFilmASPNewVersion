@@ -55,5 +55,21 @@ namespace BestFilmASPNewVersion.Controllers
             return View(model);
         }
 
+
+        // для AngularJs
+        public IActionResult AdvancedView()
+        {
+
+            return View();
+        }
+
+        // конектор 
+        public JsonResult TestService()
+        {
+            var movie = "//Репозиторий с фильмами";
+
+            return new JsonResult(movie);
+        }
+
     }
 }
