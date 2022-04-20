@@ -66,7 +66,7 @@ namespace BestFilmASPNewVersion.Controllers
         // конектор 
         public JsonResult TestService()
         {
-            var movie = "//Репозиторий с фильмами";
+            var movie = _repo.Movies.First();
 
             return new JsonResult(movie);
         }

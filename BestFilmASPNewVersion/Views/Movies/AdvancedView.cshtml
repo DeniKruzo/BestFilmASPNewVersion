@@ -4,12 +4,68 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html ng-app="mainApp">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AngularJS</title>
+    <meta charset="UTF-8" />
+    <title>Learn AngularJS</title>
+    <script src="~/Angular/angular.min.js"></script>
+    <script>
+            mainApp = angular.module("mainApp", []);
+            model = "Загрузка Базы Данных: ";
+
+        mainApp.controller("mainController", function ($scope,
+            RequestDataSirvice) {
+            $scope.message = model;
+            $scope.isLoading = false;
+            $scope.isCustomersLoaded = false;
+            $scope.requestStatus = "";
+            $scope.info = {};
+
+            $scope.btnLoadClick = function () {
+                var promiseObject = RequestDataSirvice.loadJson("/Movies/TestService");
+                $scope.isLoading = true;
+                $scope.isDataLoaded = false;
+
+                promiseObject.then(
+                    function (result) {
+                        console.log(result);
+                        $scope.isLoading = false;
+                        $scope.requestStatus = "Фильмы: ";
+                        $scope.info = result;
+                        $scope.isDataLoaded = true;
+                    },
+                    function (errorResult) {
+                        console.log(errorResult);
+                        $scope.isLoading = false;
+                        $scope.requestStatus = errorResult;
+                    }
+                );
+            }
+        });
+
+    </script>
+    <script src="~/Angular/20-requestDataService.js">
+
+    </script>
 </head>
-<body>
+<body ng-controller="mainController">
+    <h2>{{message}}</h2>
+    <div>
+        <button ng-click="btnLoadClick()">
+            Список фильмов
+        </button>
+    </div>
+    <div>
+        <img ng-show="isLoading" src="~/Angular/loading.gif" />
+    </div>
+    <div ng-hide="isLoading">
+        <h4>{{requestStatus}} </h4>
+    </div>
+    <div ng-show="isDataLoaded">
+        <ul>
+            <li>{{info.name}}</li>
+            <li>{{info.realease}}</li>
+        </ul>
+    </div>
 </body>
 </html>
