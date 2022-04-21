@@ -7,11 +7,15 @@
 <html ng-app="mainApp">
 <head>
     <meta charset="UTF-8" />
-    <title>Learn AngularJS</title>
+    <title>AngularJS</title>
     <script src="~/Angular/angular.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <script>
-            mainApp = angular.module("mainApp", []);
-            model = "Загрузка Базы Данных: ";
+        mainApp = angular.module("mainApp", []);
+        model = "Загрузка Базы Данных: ";
 
         mainApp.controller("mainController", function ($scope,
             RequestDataSirvice) {
@@ -47,11 +51,14 @@
     <script src="~/Angular/20-requestDataService.js">
 
     </script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body ng-controller="mainController">
     <h2>{{message}}</h2>
     <div>
-        <button ng-click="btnLoadClick()">
+        <button class="btn-dark" ng-click="btnLoadClick()" >
             Список фильмов
         </button>
     </div>
@@ -62,10 +69,26 @@
         <h4>{{requestStatus}} </h4>
     </div>
     <div ng-show="isDataLoaded">
-        <ul>
-            <li>{{info.name}}</li>
-            <li>{{info.realease}}</li>
-        </ul>
+
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="~/StoredImages/{{info.imageUrl}}" alt="Sample" />
+            <div class="container">
+                <h5 class="card-title">{{info.name}}</h5>
+                <p class="card-text">{{info.discription}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{info.country}}</li>
+                <li class="list-group-item">{{info.realease}} год</li>
+            </ul>
+
+        </div>
+
+
     </div>
+
+   
+
 </body>
 </html>
