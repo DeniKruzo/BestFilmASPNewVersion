@@ -24,6 +24,7 @@
             $scope.isCustomersLoaded = false;
             $scope.requestStatus = "";
             $scope.info = {};
+         
 
             $scope.btnLoadClick = function () {
                 var promiseObject = RequestDataSirvice.loadJson("/Movies/TestService");
@@ -70,25 +71,20 @@
     </div>
     <div ng-show="isDataLoaded">
 
-
-
-        <div class="card" style="width: 18rem;">
-            <img src="~/StoredImages/{{info.imageUrl}}" alt="Sample" />
-            <div class="container">
-                <h5 class="card-title">{{info.name}}</h5>
-                <p class="card-text">{{info.discription}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{info.country}}</li>
-                <li class="list-group-item">{{info.realease}} год</li>
-            </ul>
-
+        <div ng-repeat="item in info">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/StoredImages/{{item.imageUrl}}" alt="Sample" />
+                    <div class="container">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <p class="card-text">{{item.discription}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{item.country}}</li>
+                        <li class="list-group-item">{{item.realease}} год</li>
+                    </ul>
+                </div>
         </div>
 
-
     </div>
-
-   
-
 </body>
 </html>
