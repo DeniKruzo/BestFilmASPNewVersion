@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://atuin.ru/demo/ui-slider/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" href="https://atuin.ru/demo/ui-slider/jquery-ui.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://atuin.ru/demo/ui-slider/jquery-ui.min.js"></script>
+
+
+
     <script>
         mainApp = angular.module("mainApp", []);
         model = "Загрузка Базы Данных: ";
@@ -24,7 +33,26 @@
             $scope.isCustomersLoaded = false;
             $scope.requestStatus = "";
             $scope.info = {};
-         
+            $scope.minYear = 1895;
+            $scope.maxYear = 2022;
+
+        
+
+            //JQuerySlider
+            $("#slider").slider({
+                animate: "slow",
+                range: true,
+                min: 1895,
+                max: 2022,
+                values: ['1895', '2022'],
+                slide: function (event, ui) {
+                    $('#min').val(ui.values[0]);
+                    $('#max').val(ui.values[1]);
+                    $scope.maxYear = parseInt($('#max').val());
+                    $scope.minYear = parseInt($('#min').val());
+                    $scope.$apply()
+                },
+            });
 
             $scope.btnLoadClick = function () {
                 var promiseObject = RequestDataSirvice.loadJson("/Movies/TestService");
@@ -57,21 +85,60 @@
 
 </head>
 <body ng-controller="mainController">
-    <h2>{{message}}</h2>
-    <div>
-        <button class="btn-dark" ng-click="btnLoadClick()" >
-            Список фильмов
-        </button>
-    </div>
-    <div>
-        <img ng-show="isLoading" src="~/Angular/loading.gif" />
-    </div>
-    <div ng-hide="isLoading">
-        <h4>{{requestStatus}} </h4>
-    </div>
-    <div ng-show="isDataLoaded">
+    <div class="container">
+        <div class="DropMenu">
+            <div>
+                <img src="" style="margin-right: 10px;" />
+            </div>
+            <div class="DropMenu-content">
+                <div style="margin-right: 20px; vertical-align: top;">
+                    <label for="select"> Год выхода: </label>
+                    <div class="form-range" id="slider" style="max-width: 10rem; margin-bottom: 10px; "></div>
+                    <div id="slider-range" style="display: flex; flex-direction: row;">
+                        <input type="text" id="min" value="1895" style="max-width: 5rem; max-height: 2rem;">
+                        <input type="text" id="max" value="2022" style="max-width: 5rem; max-height: 2rem;">
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; margin-right: 20px; vertical-align: top;">
+                    <label for="select"> Выберите жанр: </label>
+                    <select>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: column; margin-right: 20px; vertical-align: top;">
+                    <fieldset>
+                        <legend>Страна:</legend>
+                        <div>
+                            <input type="checkbox" value="USA">
+                            <label for="coding">США</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="RUSSIA">
+                            <label for="music">Россия</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
 
-        <div ng-repeat="item in info">
+        </div>
+    </div>
+   <br/>
+    <div class="container">
+        <h2>{{message}}</h2>
+        <div>
+            <button class="btn-dark" ng-click="btnLoadClick()">
+                Список фильмов
+            </button>
+        </div>
+        <div>
+            <img ng-show="isLoading" src="~/Angular/loading.gif" />
+        </div>
+        <div ng-hide="isLoading">
+            <h4>{{requestStatus}} </h4>
+        </div>
+
+        <div ng-show="isDataLoaded">
+
+            <div ng-repeat="item in info">
                 <div class="card" style="width: 18rem;">
                     <img src="~/StoredImages/{{item.imageUrl}}" alt="Sample" />
                     <div class="container">
@@ -83,8 +150,10 @@
                         <li class="list-group-item">{{item.realease}} год</li>
                     </ul>
                 </div>
-        </div>
+            </div>
 
+        </div>
     </div>
+
 </body>
 </html>

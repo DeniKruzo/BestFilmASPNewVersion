@@ -12,6 +12,39 @@ a {
   color: #0366d6;
 }
 
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+div.DropMenu {
+    width: 65px;
+    height: 150px;
+    align-items: center;
+    background-color: rgb(205, 208, 214);
+    border: 2px solid black;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    padding: 2rem;
+    justify-content: center;
+}
+
+.DropMenu-content {
+    width: 700px;
+    height: 100px;
+    margin: 10px;
+    vertical-align: middle;
+}
+
+ 
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
