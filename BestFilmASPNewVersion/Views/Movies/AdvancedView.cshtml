@@ -32,11 +32,13 @@
             $scope.isLoading = false;
             $scope.isCustomersLoaded = false;
             $scope.requestStatus = "";
-            $scope.info = {};
+            $scope.info = [];
             $scope.minYear = 1895;
             $scope.maxYear = 2022;
+            $scope.selectedGenre = $scope.info[0];
 
-        
+
+
 
             //JQuerySlider
             $("#slider").slider({
@@ -101,7 +103,9 @@
                 </div>
                 <div style="display: flex; flex-direction: column; margin-right: 20px; vertical-align: top;">
                     <label for="select"> Выберите жанр: </label>
-                    <select>
+                    <select ng-model="selectedGenre"
+                        ng-options="item.genre for item in info">
+                        
                     </select>
                 </div>
                 <div style="display: flex; flex-direction: column; margin-right: 20px; vertical-align: top;">

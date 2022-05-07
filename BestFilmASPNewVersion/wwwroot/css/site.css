@@ -25,6 +25,8 @@ a {
 }
 
 div.DropMenu {
+    display: flex;
+    flex-direction: row;
     width: 65px;
     height: 150px;
     align-items: center;
@@ -37,13 +39,17 @@ div.DropMenu {
 }
 
 .DropMenu-content {
+    display: none;
     width: 700px;
     height: 100px;
     margin: 10px;
     vertical-align: middle;
 }
 
- 
+
+.DropMenu:hover .DropMenu-content {
+    display: inline-flex;
+}  
 
 .btn-primary {
   color: #fff;
