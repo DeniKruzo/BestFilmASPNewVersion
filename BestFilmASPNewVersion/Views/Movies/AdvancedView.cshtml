@@ -38,6 +38,16 @@
             $scope.selectedGenre = $scope.info[0];
 
 
+            $(function () {
+                $('.DropMenu').mouseenter(
+                    function () {
+                        $(this).animate({ width: 900 });
+                    });
+                $('.DropMenu').mouseleave(
+                    function () {
+                        $(this).animate({ width: 65 });
+                    });
+            });
 
 
             //JQuerySlider
@@ -90,7 +100,7 @@
     <div class="container">
         <div class="DropMenu">
             <div>
-                <img src="" style="margin-right: 10px;" />
+                <img src="~/Angular/pngwing.png" style="margin-right: 10px;" />
             </div>
             <div class="DropMenu-content">
                 <div style="margin-right: 20px; vertical-align: top;">
@@ -142,7 +152,7 @@
 
         <div ng-show="isDataLoaded">
 
-            <div ng-repeat="item in info">
+            <div ng-repeat="item in info | filter: selectedGenre">
                 <div class="card" style="width: 18rem;">
                     <img src="~/StoredImages/{{item.imageUrl}}" alt="Sample" />
                     <div class="container">
